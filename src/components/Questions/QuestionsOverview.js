@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { formatQuestion } from "../../utils/helpers";
 
 //TODO User can only vote once per question
-export default function QuestionOveview(props) {
+ function QuestionOveview(props) {
   const { name, avatar, optionOne, optionTwo, id } = props.question;
 
   return (
@@ -26,19 +28,39 @@ export default function QuestionOveview(props) {
         <div>
           <p>Would you rather {optionOne.text}</p>
           {/*TODO: Make a percentage view*/}
+          <span>
+          {
+           `${((optionOne.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100).toFixed(2)}%`
+          }
+          </span>
           <p>
-            {optionOne.lenght} out of {optionOne.lenght + optionOne.lenght}
+            {optionOne.votes.length} out of {optionOne.votes.length + optionTwo.votes.length}
           </p>
         </div>
         <div>
           <p>Would you rather {optionTwo.text}</p>
           {/*TODO: Make a percentage view*/}
-
+          {
+           `${((optionTwo.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100).toFixed(2)}%`
+          }
           <p>
-            {optionTwo.lenght} out of {optionOne.lenght + optionOne.lenght}
+            {optionTwo.votes.length} out of {optionOne.votes.length + optionTwo.votes.length}
           </p>
         </div>
       </div>
     </div>
   );
 }
+
+
+const mapStateToProps = ({ authUser, users, questions }, { id }) => {
+  const question = questions[id];
+
+  return {
+    authUser,
+    users,
+    question: formatQuestion(question, users[question.author], authUser),
+  };
+};
+
+export default connect(mapStateToProps)(QuestionOveview);

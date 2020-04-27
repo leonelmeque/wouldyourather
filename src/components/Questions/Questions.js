@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { formatQuestion } from "../../utils/helpers";
 import { Link } from "react-router-dom";
 import { handleAnswerQuestion } from "../../actions/questions";
+import { handleUpdateAnsweredQuestions } from "../../actions/users";
 
 /*
 TODO: build a form to make user post a new question using the route /add 
@@ -11,72 +12,97 @@ It should show the text "Would You Rather" and have two options, once submited
 the question should show up in a new pool and the user should be sent to the home page
 */
 
-export function QuestionToBeAnswered(props) {
-  const { name, avatar, optionOne, optionTwo, id } = props.question;
-  const [state, setState] = React.useState({
-    option: "",
-  });
+class QuestionToBeAnswered extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      option: "",
+    };
+  }
 
-  const handleChange = (e) => {
-    setState({
+  handleSubmit(e,id) {
+    e.stopPropagation();
+    const { dispatch, authUser } = this.props;
+    dispatch(
+      handleAnswerQuestion({
+        authUser: authUser.id,
+        id: id,
+        answer: this.state.option,
+      })
+    );
+
+    dispatch(
+      handleUpdateAnsweredQuestions({
+        authUser: authUser.id,
+        qId: id,
+        answer: this.state.option,
+      })
+    );
+  }
+
+  handleChange = (e) => {
+    this.setState({
       option: e.target.value,
     });
   };
 
-  return (
-    <div>
-      <span>
-        <h3>{name} asks:</h3>
-      </span>
-      <img
-        src={avatar}
-        alt={name}
-        style={{
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          objectFit: "cover",
-        }}
-      />
-
+  render() {
+    const { name, avatar, optionOne, optionTwo, id } = this.props.question;
+    
+    return (
       <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-
-            props.dispatch(
-              handleAnswerQuestion({
-                authUser: props.authUser.id,
-                id: id,
-                answer: state.option,
-              })
-            );
+        <span>
+          <h3>{name} asks:</h3>
+        </span>
+        <img
+          src={avatar}
+          alt={name}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 50,
+            objectFit: "cover",
           }}
-        >
-          <h2>Would you rather</h2>
-          <input
-            type="radio"
-            id="optionOne"
-            value="optionOne"
-            name="answer"
-            onChange={handleChange}
-          />
-          <label htmlFor="optionOne">{optionOne.text}</label>
-          <br />
-          <input
-            type="radio"
-            id="optionTwo"
-            value="optionTwo"
-            name="answer"
-            onChange={handleChange}
-          />
-          <label htmlFor="optionTwo">{optionTwo.text}</label>
-          <br />
-          <button type="submit">Submit Answer</button>
-        </form>
+        />
+
+        <div>
+          <form
+           
+          >
+            <h2>Would you rather</h2>
+            <input
+              type="radio"
+              id="optionOne"
+              value="optionOne"
+              name="answer"
+              onChange={(e)=>this.handleChange(e)}
+            />
+            <label htmlFor="optionOne">{optionOne.text}</label>
+            <br />
+            <input
+              type="radio"
+              id="optionTwo"
+              value="optionTwo"
+              name="answer"
+              onChange={(e)=>this.handleChange(e)}
+            />
+            <label htmlFor="optionTwo">{optionTwo.text}</label>
+            <br />
+            <Link
+              to={"/answeredquestions/" + id}
+            
+              onClick={(e)=>{this.handleSubmit(e,id)}}
+              style={{
+                pointerEvents: this.state.option.length > 0 ? "auto" : "none",
+              }}
+            >
+              Submit Answer
+            </Link>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 function QuestionPreview(props) {
@@ -136,7 +162,7 @@ class Question extends React.Component {
       );
     }
 
-    if (unAnswered === false && unAnswered === false) {
+    if (unAnswered === false && Object.keys(answers).indexOf(id) === -1) {
       return (
         <div>
           {unlockOptions === true ? (
@@ -166,4 +192,7 @@ const mapStateToProps = ({ authUser, users, questions }, { id }) => {
   };
 };
 
-export default connect(mapStateToProps)(Question);
+export default {
+  Question: connect(mapStateToProps)(Question),
+  QuestionToBeAnswered: connect(mapStateToProps)(QuestionToBeAnswered),
+};
