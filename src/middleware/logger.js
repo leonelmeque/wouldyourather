@@ -1,6 +1,6 @@
 const logger = store=>next=>action=>{
     console.group(action.type)
-    console.info('The Acton: ', action)
+    console.info('The Action: ', action)
     let result = next(action)
     console.log('next state', store.getState())
     console.groupEnd();

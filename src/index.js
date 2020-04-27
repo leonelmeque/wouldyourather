@@ -7,16 +7,19 @@ import App from "./App";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
-import middleware from "./middleware"
+import middleware from "./middleware";
+import { BrowserRouter } from "react-router-dom";
 
 
-const store = createStore(reducer,middleware);
+const store = createStore(reducer, middleware);
 
 //Wrap our app component in a provider that has the store
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")

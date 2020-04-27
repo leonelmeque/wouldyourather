@@ -2,7 +2,8 @@ let users = {
   sarahedo: {
     id: "sarahedo",
     name: "Sarah Edo",
-    avatarURL: "",
+    avatarURL:
+      "https://images.unsplash.com/photo-1532910404247-7ee9488d7292?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=282&q=80",
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionTwo",
@@ -14,7 +15,8 @@ let users = {
   tylermcginnis: {
     id: "tylermcginnis",
     name: "Tyler McGinnis",
-    avatarURL: "",
+    avatarURL:
+      "https://images.unsplash.com/photo-1519238359922-989348752efb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=299&q=80",
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo",
@@ -24,7 +26,8 @@ let users = {
   johndoe: {
     id: "johndoe",
     name: "John Doe",
-    avatarURL: "",
+    avatarURL:
+      "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
@@ -122,19 +125,19 @@ function generateUID() {
   );
 }
 
-export function _getUsers () {
+export function _getUsers() {
   return new Promise((res, rej) => {
-    setTimeout(() => res({...users}), 1000)
-  })
+    setTimeout(() => res({ ...users }), 1000);
+  });
 }
 
-export function _getQuestions () {
+export function _getQuestions() {
   return new Promise((res, rej) => {
-    setTimeout(() => res({...questions}), 1000)
-  })
+    setTimeout(() => res({ ...questions }), 1000);
+  });
 }
 
-function formatQuestion ({ optionOneText, optionTwoText, author }) {
+function formatQuestion({ optionOneText, optionTwoText, author }) {
   return {
     id: generateUID(),
     timestamp: Date.now(),
@@ -146,11 +149,11 @@ function formatQuestion ({ optionOneText, optionTwoText, author }) {
     optionTwo: {
       votes: [],
       text: optionTwoText,
-    }
-  }
+    },
+  };
 }
 
-export function _saveQuestion (question) {
+export function _saveQuestion(question) {
   return new Promise((res, rej) => {
     const authedUser = question.author;
     const formattedQuestion = formatQuestion(question);
@@ -158,48 +161,49 @@ export function _saveQuestion (question) {
     setTimeout(() => {
       questions = {
         ...questions,
-        [formattedQuestion.id]: formattedQuestion
-      }
-      
+        [formattedQuestion.id]: formattedQuestion,
+      };
+
       users = {
         ...users,
         [authedUser]: {
           ...users[authedUser],
-          questions: users[authedUser].questions.concat([formattedQuestion.id])
-        }
-      }
+          questions: users[authedUser].questions.concat([formattedQuestion.id]),
+        },
+      };
 
-      res(formattedQuestion)
-    }, 1000)
-  })
+      res(formattedQuestion);
+    }, 1000);
+  });
 }
 
-export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
+export function _saveQuestionAnswer({ authUser, id, answer }) {
+  
   return new Promise((res, rej) => {
     setTimeout(() => {
       users = {
         ...users,
-        [authedUser]: {
-          ...users[authedUser],
+        [authUser]: {
+          ...users[authUser],
           answers: {
-            ...users[authedUser].answers,
-            [qid]: answer
-          }
-        }
-      }
+            ...users[authUser].answers,
+            [id]: answer,
+          },
+        },
+      };
 
       questions = {
         ...questions,
-        [qid]: {
-          ...questions[qid],
+        [id]: {
+          ...questions[id],
           [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser])
-          }
-        }
-      }
+            ...questions[id][answer],
+            votes: questions[id][answer].votes.concat([authUser]),
+          },
+        },
+      };
 
-      res()
-    }, 500)
-  })
+      res();
+    }, 500);
+  });
 }
