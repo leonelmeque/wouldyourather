@@ -14,20 +14,23 @@ class Navigation extends React.Component {
     return (
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/add">New Question</Link>
-        <Link to="/leaderboard">Leader Board</Link>
+
+        {this.props.authUser.id && <Link to="/add">New Question</Link>}
+        {this.props.authUser.id && <Link to="/leaderboard">Leader Board</Link>}
 
         {this.props.authUser.id && <span>{this.props.authUser.id}</span>}
         <img src="" alt="" />
-        <Link
-          to="/login"
-          onClick={(e) => {
-            e.stopPropagation();
-            dispatch(authenticateUSer(null));
-          }}
-        >
-          Logout
-        </Link>
+        {this.props.authUser.id && (
+          <Link
+            to="/login"
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(authenticateUSer(null));
+            }}
+          >
+            Logout
+          </Link>
+        )}
       </nav>
     );
   }

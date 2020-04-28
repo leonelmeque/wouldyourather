@@ -8,7 +8,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 
 const store = createStore(reducer, middleware);
@@ -17,9 +17,9 @@ const store = createStore(reducer, middleware);
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <BrowserRouter>
+      <Router>
         <App />
-      </BrowserRouter>
+      </Router>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")
