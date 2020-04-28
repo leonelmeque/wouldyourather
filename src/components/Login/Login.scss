@@ -1,0 +1,26 @@
+.login-container{
+    width: 50%;
+    height: 50vh;
+    color:white;
+    background: #4CAF50;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    h2{
+        width: 100%;
+        text-align: center;
+        margin: 8px 0px;
+    }
+
+    select{
+        width: 80%;
+        margin: 8px 10%;
+    }
+
+    a{
+        width: 50%;
+        margin: 8px auto;
+    }
+}

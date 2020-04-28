@@ -5,20 +5,24 @@ import { authenticateUSer } from "../../actions/authUser";
 import "./shared.css";
 
 /**
- * The users information should appear in the navigation bar, the user can log in or out
- *
+ * Navigation Component
  */
 class Navigation extends React.Component {
   render() {
-    const { dispatch } = this.props;
+    const { dispatch, users } = this.props;
     return (
       <nav>
         <Link to="/">Home</Link>
+        <Link to="/add">New Question</Link>
+        <Link to="/leaderboard">Leader Board</Link>
 
-        {this.props.authUser.id && <Link to="/add">New Question</Link>}
-        {this.props.authUser.id && <Link to="/leaderboard">Leader Board</Link>}
-
-        {this.props.authUser.id && <span>{this.props.authUser.id}</span>}
+        {this.props.authUser.id && (
+          <span
+            style={{
+              margin:'0px 10px'
+            }}
+          >Hello {users[this.props.authUser.id].name}</span>
+        )}
         <img src="" alt="" />
         {this.props.authUser.id && (
           <Link
@@ -36,9 +40,10 @@ class Navigation extends React.Component {
   }
 }
 
-const mapStateToProps = ({ authUser }) => {
+const mapStateToProps = ({ authUser, users }) => {
   return {
     authUser,
+    users,
   };
 };
 
