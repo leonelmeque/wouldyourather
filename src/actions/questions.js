@@ -3,8 +3,6 @@ import { saveQuestionAnswer, saveNewQuestion } from "../utils/api";
 /** Actions Types*/
 export const ADD_QUESTION = "ADD_QUESTION";
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
-export const ANSWERED_QUESTIONS = "ANSWERED_QUESTIONS";
-export const UNANSWERED_QUESTIONS = "UNANSWERED_QUESTIONS";
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 
 /** Action Creators */
@@ -47,7 +45,7 @@ export function handleAnswerQuestion(info) {
 }
 
 export function handleSaveNewQuestion(info) {
-  console.log(info);
+
   return (dispatch) => {
     dispatch(addQuestion(info));
 

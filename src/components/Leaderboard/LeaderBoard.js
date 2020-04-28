@@ -1,8 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+
 
 class LeaderBoard extends React.Component {
+
+  
   formatUsers() {
     const { users } = this.props;
     const formatedUsers = Object.values(users).map((user) => {
@@ -25,7 +27,7 @@ class LeaderBoard extends React.Component {
       <>
         {rankingUsers.map((user) => {
           return (
-            <>
+            <div key={user.name}>
               <img
                 src={user.avatar}
                 alt={user.name}
@@ -49,7 +51,7 @@ class LeaderBoard extends React.Component {
               <h5>Score</h5>
               <span>{user.rankingPoints}</span>
               <br/>
-            </>
+            </div>
           );
         })}
       </>

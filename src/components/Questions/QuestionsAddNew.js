@@ -3,13 +3,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { handleSaveNewQuestion } from "../../actions/questions";
 import { newformatQuestion } from "../../utils/helpers";
-//TODO User can only vote once per question
+
+
 class QuestionAddNew extends React.Component {
   constructor(props) {
     super(props);
     this.questionOne = React.createRef();
     this.questionTwo = React.createRef();
   }
+
+  
   handleSubmit() {
     const optionOneText = this.questionOne.current.value;
     const optionTwoText = this.questionTwo.current.value;

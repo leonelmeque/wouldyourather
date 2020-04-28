@@ -1,17 +1,10 @@
-//Questions class component
 import React from "react";
 import { connect } from "react-redux";
 import { formatQuestion } from "../../utils/helpers";
 import { Link } from "react-router-dom";
 import { handleAnswerQuestion } from "../../actions/questions";
 import { handleUpdateAnsweredQuestions } from "../../actions/users";
-
-/*
-TODO: build a form to make user post a new question using the route /add 
-It should show the text "Would You Rather" and have two options, once submited
-the question should show up in a new pool and the user should be sent to the home page
-*/
-
+import "./question.css";
 class QuestionToBeAnswered extends React.Component {
   constructor(props) {
     super(props);
@@ -108,21 +101,24 @@ function QuestionPreview(props) {
   const { name, avatar, optionOne, id } = props.question;
 
   return (
-    <>
+    <div className="question-container">
       <span>
         <h3>{name} asks:</h3>
       </span>
-      <img
-        src={avatar}
-        alt={name}
-        style={{
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          objectFit: "cover",
-        }}
-      />
-      <div>
+      <div className="avatar">
+        <img
+          src={avatar}
+          alt={name}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 50,
+            objectFit: "cover",
+          }}
+        />
+      </div>
+
+      <div className="details">
         <h2>Would you rather</h2>
         <p>{optionOne.text}</p>
         {props.unAnswered ? (
@@ -131,7 +127,7 @@ function QuestionPreview(props) {
           <Link to={`/questions/${id}`}>View Poll</Link>
         )}
       </div>
-    </>
+    </div>
   );
 }
 class Question extends React.Component {
@@ -149,19 +145,11 @@ class Question extends React.Component {
     const { answers } = users[authUser.id];
 
     if (Object.keys(answers).indexOf(id) !== -1 && unAnswered === true) {
-      return (
-        <div>
-          <QuestionPreview question={question} unAnswered={unAnswered} />
-        </div>
-      );
+      return <QuestionPreview question={question} unAnswered={unAnswered} />;
     }
 
     if (unAnswered === false && Object.keys(answers).indexOf(id) === -1) {
-      return (
-        <div>
-          <QuestionPreview question={question} unAnswered={unAnswered} />
-        </div>
-      );
+      return <QuestionPreview question={question} unAnswered={unAnswered} />;
     }
 
     return null;

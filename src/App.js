@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
-import { authenticateUSer } from "./actions/authUser";
 import Navigation from "./components/shared/Navigation";
 import Routes from "./components/shared/Routes";
 import "./App.css";
@@ -31,7 +30,7 @@ class App extends React.Component {
           <>
             <Navigation username={this.props.authUser} />
             <div className="App-container">
-              {this.props.authUser.id===undefined ? <Login /> : <Routes authUser={this.props.authUser} />}
+              {this.props.authUser.id===undefined || this.props.authUser.id===null ? <Login /> : <Routes authUser={this.props.authUser} />}
               
             </div>
           </>
@@ -41,12 +40,12 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ authUser, questions }) => {
+const mapStateToProps = ({authUser}) => {
   return {
     loading: authUser === null,
     authUser,
   };
 };
 
-//connect the app with no state because we do not need it yet
+
 export default connect(mapStateToProps)(App);

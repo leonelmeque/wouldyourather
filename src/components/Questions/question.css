@@ -1,5 +1,40 @@
 .question-container{
-    width: 200px;
-    display: grid;
+   background-color: rgb(253, 253, 253);
+   width: 100%;
+   border: 1px solid black;
+   border-radius: 5px;
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   margin: 20px 0;
+   padding: 10px px;
+   align-items: center;
+}
+.question-container span{
+    width: 100%;
+    border-bottom: 1px solid black;
+    padding: 10px 0px;
+}
+
+.avatar{
+    width: 25%;
+    margin:0px 10px;
+}
+
+.details{
+    width: 65%;
+    margin: 20px 0px;
+    padding: 10px 0px;
+    margin-right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     
+    border-left: 1px solid;
+}
+
+.question-container h3{
+    padding-left: 10px;
 }
