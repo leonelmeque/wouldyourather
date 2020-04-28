@@ -20,7 +20,7 @@ class QuestionToBeAnswered extends React.Component {
     };
   }
 
-  handleSubmit(e,id) {
+  handleSubmit(e, id) {
     e.stopPropagation();
     const { dispatch, authUser } = this.props;
     dispatch(
@@ -48,7 +48,7 @@ class QuestionToBeAnswered extends React.Component {
 
   render() {
     const { name, avatar, optionOne, optionTwo, id } = this.props.question;
-    
+
     return (
       <div>
         <span>
@@ -66,16 +66,14 @@ class QuestionToBeAnswered extends React.Component {
         />
 
         <div>
-          <form
-           
-          >
+          <form>
             <h2>Would you rather</h2>
             <input
               type="radio"
               id="optionOne"
               value="optionOne"
               name="answer"
-              onChange={(e)=>this.handleChange(e)}
+              onChange={(e) => this.handleChange(e)}
             />
             <label htmlFor="optionOne">{optionOne.text}</label>
             <br />
@@ -84,14 +82,15 @@ class QuestionToBeAnswered extends React.Component {
               id="optionTwo"
               value="optionTwo"
               name="answer"
-              onChange={(e)=>this.handleChange(e)}
+              onChange={(e) => this.handleChange(e)}
             />
             <label htmlFor="optionTwo">{optionTwo.text}</label>
             <br />
             <Link
               to={"/answeredquestions/" + id}
-            
-              onClick={(e)=>{this.handleSubmit(e,id)}}
+              onClick={(e) => {
+                this.handleSubmit(e, id);
+              }}
               style={{
                 pointerEvents: this.state.option.length > 0 ? "auto" : "none",
               }}
@@ -126,17 +125,20 @@ function QuestionPreview(props) {
       <div>
         <h2>Would you rather</h2>
         <p>{optionOne.text}</p>
-        <Link to={`/questions/${id}`}>View Poll</Link>
+        {props.unAnswered ? (
+          <Link to={`/answeredquestions/${id}`}>View Poll</Link>
+        ) : (
+          <Link to={`/questions/${id}`}>View Poll</Link>
+        )}
       </div>
     </>
   );
 }
 class Question extends React.Component {
   render() {
-    const { question, dispatch, users, authUser } = this.props;
-    let { unlockOptions, unAnswered } = this.props;
+    const { question, users, authUser } = this.props;
+    let { unAnswered } = this.props;
 
-    unlockOptions = unlockOptions === undefined ? true : false;
     unAnswered = unAnswered === undefined ? true : false;
 
     if (question === null) {
@@ -149,15 +151,7 @@ class Question extends React.Component {
     if (Object.keys(answers).indexOf(id) !== -1 && unAnswered === true) {
       return (
         <div>
-          {unlockOptions === true ? (
-            <QuestionPreview question={question} />
-          ) : (
-            <QuestionToBeAnswered
-              authUser={authUser}
-              question={question}
-              dispatch={dispatch}
-            />
-          )}
+          <QuestionPreview question={question} unAnswered={unAnswered} />
         </div>
       );
     }
@@ -165,15 +159,7 @@ class Question extends React.Component {
     if (unAnswered === false && Object.keys(answers).indexOf(id) === -1) {
       return (
         <div>
-          {unlockOptions === true ? (
-            <QuestionPreview question={question} />
-          ) : (
-            <QuestionToBeAnswered
-              authUser={authUser}
-              question={question}
-              dispatch={dispatch}
-            />
-          )}
+          <QuestionPreview question={question} unAnswered={unAnswered} />
         </div>
       );
     }

@@ -7,3 +7,10 @@ export function setAuthUser(id){
         id
     }
 }
+
+export function authenticateUSer(user){
+    return (dispatch)=>{
+        dispatch(setAuthUser(user))
+    }
+}
+    

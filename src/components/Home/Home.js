@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Questions from "../Questions/Questions";
+import Login from '../Login/Login';
 import "./home.css";
 
 class Home extends React.Component {
@@ -11,11 +12,7 @@ class Home extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.authUser.id.lenght > 0) {
-      this.forceUpdate();
-    }
-  }
+
 
   handleToggle(e, toggle) {
     e.preventDefault();
@@ -31,7 +28,9 @@ class Home extends React.Component {
 
     return (
       <>
-        <div>
+        {
+          this.props.authUser!==null ? 
+          <div>
           <div>
             <button onClick={(e) => this.handleToggle(e, true)}>
               <h3>Answered Questions</h3>
@@ -61,6 +60,9 @@ class Home extends React.Component {
                 })}
           </div>
         </div>
+          : <Login />
+        }
+        
       </>
     );
   }

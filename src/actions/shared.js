@@ -3,14 +3,14 @@ import { receiveUsers } from "../actions/users";
 import { receiveQuestions } from "../actions/questions";
 import { setAuthUser } from "../actions/authUser";
 
-const AUTHED_ID = "sarahedo";
+
 
 export function handleInitialData() {
   return (dispatch) => {
-    return getInitialData().then(({ users, questions }) => {
+    return getInitialData().then(({ users, questions,authUser }) => {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
-      dispatch(setAuthUser(AUTHED_ID));
+      dispatch(setAuthUser(authUser));
     });
   };
 }
