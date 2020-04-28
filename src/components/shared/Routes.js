@@ -3,15 +3,14 @@ import QuestionOveview from "../../components/Questions/QuestionsOverview";
 import QuestionAddNew from "../../components/Questions/QuestionsAddNew";
 import LeaderBoard from "../../components/Leaderboard/LeaderBoard";
 import Questions from "../../components/Questions/Questions";
-import { Router, Switch, Route, Redirect } from "react-router-dom";
+import {Switch, Route, Redirect } from "react-router-dom";
 import Login from "../../components/Login/Login";
 import Home from "../../components/Home/Home";
-import history from "../../utils/history";
+
 
 export default class Routes extends React.Component {
   render() {
     return (
-     
       <Switch>
         <Route exact path="/">
           {this.props.authUser.id === undefined ||

@@ -15,11 +15,11 @@ export function receiveUsers(users) {
  * Updating user answered questions
  */
 
-export function updateAnsweredQuestions({ authUser, qId, answer }) {
+export function updateAnsweredQuestions({ authUser, id, answer }) {
   return {
     type: UPDATE_USER,
     authUser,
-    qId,
+    id,
     answer,
   };
 }

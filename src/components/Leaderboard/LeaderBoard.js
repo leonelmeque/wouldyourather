@@ -1,19 +1,65 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-/**
- * TODO: Each leader board should contain a user name, picture, number of questions asked and 
- * number of questions answered, the users should be ordered in a descending order based on a sum of 
- * number of questons they have asked and the number of questions answered. 
- * the user should be signed in order to see these pages
- */
-class LeaderBoard extends React.Component{
-    render(){
-        return(
+class LeaderBoard extends React.Component {
+  formatUsers() {
+    const { users } = this.props;
+    const formatedUsers = Object.values(users).map((user) => {
+      return {
+        name: user.name,
+        avatar: user.avatarURL,
+        totalAskedQuestions: Object.keys(user.answers).length,
+        totalAnsweredQuestions: user.questions.length,
+        rankingPoints: Object.keys(user.answers).length + user.questions.length,
+      };
+    });
+
+    formatedUsers.sort((a, b) => b.rankingPoints - a.rankingPoints);
+    return formatedUsers;
+  }
+
+  render() {
+    const rankingUsers = this.formatUsers();
+    return (
+      <>
+        {rankingUsers.map((user) => {
+          return (
             <>
-              Leaderboard
+              <img
+                src={user.avatar}
+                alt={user.name}
+                style={{
+                  width: 100,
+                  height: 100,
+                  borderRadius: 50,
+                  objectFit: "cover",
+                }}
+              />
+
+              <h3>{user.name}</h3>
+
+              <p>
+                Answered questions <span>{user.totalAnsweredQuestions}</span>
+              </p>
+              <p>
+                Created questions <span>{user.totalAskedQuestions}</span>
+              </p>
+
+              <h5>Score</h5>
+              <span>{user.rankingPoints}</span>
+              <br/>
             </>
-        )
-    }
+          );
+        })}
+      </>
+    );
+  }
 }
 
-export default LeaderBoard;
+const mapStateToProps = ({ users }) => {
+  return {
+    users,
+  };
+};
+export default connect(mapStateToProps)(LeaderBoard);

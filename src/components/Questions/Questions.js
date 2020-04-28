@@ -34,7 +34,7 @@ class QuestionToBeAnswered extends React.Component {
     dispatch(
       handleUpdateAnsweredQuestions({
         authUser: authUser.id,
-        qId: id,
+        id: id,
         answer: this.state.option,
       })
     );

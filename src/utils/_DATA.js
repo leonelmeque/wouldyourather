@@ -154,6 +154,7 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
 }
 
 export function _saveQuestion(question) {
+  
   return new Promise((res, rej) => {
     const authedUser = question.author;
     const formattedQuestion = formatQuestion(question);
@@ -191,18 +192,20 @@ export function _saveQuestionAnswer({ authUser, id, answer }) {
           },
         },
       };
-
+    
+     
       questions = {
         ...questions,
         [id]: {
           ...questions[id],
-          [answer]: {
-            ...questions[id][answer],
+          'optionOne': {
+            ...questions[id]['optionOne'],
             votes: questions[id][answer].votes.concat([authUser]),
           },
         },
       };
 
+     
       res();
     }, 500);
   });

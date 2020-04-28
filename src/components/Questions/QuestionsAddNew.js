@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { handleSaveNewQuestion } from "../../actions/questions";
+import { newformatQuestion } from "../../utils/helpers";
 //TODO User can only vote once per question
 class QuestionAddNew extends React.Component {
   constructor(props) {
@@ -9,11 +11,19 @@ class QuestionAddNew extends React.Component {
     this.questionTwo = React.createRef();
   }
   handleSubmit() {
-    const valueOne = this.questionOne.current;
-    const valueTwo = this.questionTwo.current;
-    const { authUser, user, questions } = this.props;
+    const optionOneText = this.questionOne.current.value;
+    const optionTwoText = this.questionTwo.current.value;
+    const author = this.props.authUser.id;
+    const { dispatch } = this.props;
 
-    if (valueOne.value !== "" && valueTwo.value !== "") {
+    const question = newformatQuestion({
+      optionOneText,
+      optionTwoText,
+      author,
+    });
+
+    if (optionOneText !== "" && optionTwoText !== "") {
+      dispatch(handleSaveNewQuestion(question));
       this.props.history.push("/");
     } else {
       alert("Something is missing");
@@ -56,7 +66,7 @@ const mapStateToProps = ({ authUser, users, questions }) => {
   const user = users[authUser.id];
   return {
     authUser,
-    users,
+    user,
     questions,
   };
 };

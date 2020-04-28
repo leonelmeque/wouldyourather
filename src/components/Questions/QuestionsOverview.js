@@ -57,10 +57,10 @@ import { formatQuestion } from "../../utils/helpers";
 
 const mapStateToProps = ({ authUser, users, questions }, { id }) => {
   const question = questions[id];
-  const user = users[authUser.id];
+  // const user = users[authUser.id];
 
 
-  console.log('A :' + JSON.stringify(users[authUser.id].answers[id]));
+  // console.log('A :' + JSON.stringify(users[authUser.id].answers[id]));
   return {
     authUser,
     answer: users[authUser.id].answers[id],

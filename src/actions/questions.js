@@ -1,4 +1,5 @@
-import { saveQuestionAnswer } from "../utils/api";
+import { saveQuestionAnswer, saveNewQuestion } from "../utils/api";
+
 /** Actions Types*/
 export const ADD_QUESTION = "ADD_QUESTION";
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
@@ -17,7 +18,6 @@ export function addQuestion(question) {
 }
 
 export function answerQuestion({ authUser, id, answer }) {
-  
   return {
     type: ANSWER_QUESTION,
     authUser,
@@ -34,16 +34,26 @@ export function receiveQuestions(questions) {
   };
 }
 
-
 /** Asynchronous action creators */
-export function handleAnswerQuestion(info){
-    return (dispatch)=>{
-        dispatch(answerQuestion(info))
-        
-        return saveQuestionAnswer(info).catch((e)=>{
-            console.warn('Question was not answered ', e);
-            alert ('Failed to answer you question :-(')
-        })
-    }
+export function handleAnswerQuestion(info) {
+  return (dispatch) => {
+    dispatch(answerQuestion(info));
+
+    return saveQuestionAnswer(info).catch((e) => {
+      console.warn("Question was not answered ", e);
+      alert("Failed to answer you question :-(");
+    });
+  };
 }
-    
+
+export function handleSaveNewQuestion(info) {
+  console.log(info);
+  return (dispatch) => {
+    dispatch(addQuestion(info));
+
+    return saveNewQuestion(info).catch((e) => {
+      console.warn("Question was not saved ", e);
+      alert("Failed to save the new question :-(");
+    });
+  };
+}
