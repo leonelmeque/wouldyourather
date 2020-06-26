@@ -6,7 +6,7 @@ import Routes from "./components/shared/Routes";
 import "./App.css";
 import "./main.scss";
 import Login from "./components/Login/Login";
-import { Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -21,16 +21,13 @@ class App extends React.Component {
         ) : (
           <>
             <Navigation username={this.props.authUser} />
-            <Container>
-           
-                {this.props.authUser.id === undefined ||
-                this.props.authUser.id === null ? (
-                  <Login />
-                ) : (
-                  <Routes authUser={this.props.authUser} />
-                )}
-           
-            </Container>
+
+            {this.props.authUser.id === undefined ||
+            this.props.authUser.id === null ? (
+              <Login />
+            ) : (
+              <Routes authUser={this.props.authUser} />
+            )}
           </>
         )}
       </div>

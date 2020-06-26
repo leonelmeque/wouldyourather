@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { authenticateUSer } from "../../actions/authUser";
-import { Button, Col, Row, Container } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import "./Login.scss";
 class Login extends React.Component {
   constructor(props) {
