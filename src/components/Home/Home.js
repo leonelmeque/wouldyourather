@@ -29,7 +29,7 @@ class Home extends React.Component {
         {this.props.authUser !== null ? (
               <Col md={6}>
                 <div className="justify-content-center">
-                  <div style={{ width: 400 }}>
+                  <div >
                     <div style={{ display: "flex" }}>
                       <div>
                         <button onClick={(e) => this.handleToggle(e, false)}>

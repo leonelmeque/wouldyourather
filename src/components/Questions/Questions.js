@@ -4,6 +4,7 @@ import { formatQuestion } from "../../utils/helpers";
 import { Link } from "react-router-dom";
 import { handleAnswerQuestion } from "../../actions/questions";
 import { handleUpdateAnsweredQuestions } from "../../actions/users";
+import {Col} from "react-bootstrap";
 import "./question.css";
 class QuestionToBeAnswered extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class QuestionToBeAnswered extends React.Component {
     const { name, avatar, optionOne, optionTwo, id } = this.props.question;
 
     return (
-      <div>
+      <Col sm={6}>
         <span>
           <h3>{name} asks:</h3>
         </span>
@@ -81,6 +82,7 @@ class QuestionToBeAnswered extends React.Component {
             <br />
             <Link
               to={"/answeredquestions/" + id}
+              className="btn btn-primary"
               onClick={(e) => {
                 this.handleSubmit(e, id);
               }}
@@ -92,7 +94,7 @@ class QuestionToBeAnswered extends React.Component {
             </Link>
           </form>
         </div>
-      </div>
+      </Col>
     );
   }
 }
@@ -122,9 +124,9 @@ function QuestionPreview(props) {
         <h2>Would you rather</h2>
         <p>{optionOne.text}</p>
         {props.unAnswered ? (
-          <Link to={`/answeredquestions/${id}`}>View Poll</Link>
+          <Link className="btn btn-primary" to={`/answeredquestions/${id}`}>View Poll</Link>
         ) : (
-          <Link to={`/questions/${id}`}>View Poll</Link>
+          <Link className="btn btn-primary" to={`/questions/${id}`}>View Poll</Link>
         )}
       </div>
     </div>

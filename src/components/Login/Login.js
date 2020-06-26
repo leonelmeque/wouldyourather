@@ -7,7 +7,6 @@ import "./Login.scss";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       users: ["sarahedo", "tylermcginnis", "johndoe"],
       selectedUser: "none",

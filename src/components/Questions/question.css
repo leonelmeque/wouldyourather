@@ -1,9 +1,7 @@
-/*
 .question-container{
    background-color: rgb(253, 253, 253);
    width: 100%;
    border: 1px solid black;
-   border-radius: 5px;
    display: flex;
    flex-wrap: wrap;
    flex-direction: row;
@@ -20,6 +18,8 @@
 .avatar{
     width: 25%;
     margin:0px 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .details{
@@ -40,4 +40,3 @@
     padding-left: 10px;
 }
 
-*/
