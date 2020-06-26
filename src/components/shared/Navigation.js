@@ -12,10 +12,11 @@ class Navigation extends React.Component {
   render() {
     const { dispatch, users } = this.props;
     return (
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand>Would Your Rather</Navbar.Brand>
-          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Brand href="#">Would Your Rather</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse mb="mr-auto" className="justify-content-end">
             <Nav>
               <Link className="nav-link" to="/">
                 Home
@@ -30,6 +31,7 @@ class Navigation extends React.Component {
                 <span
                   style={{
                     margin: "auto 10px",
+                    color:"#ffffff"
                   }}
                 >
                   Hi{" "}
