@@ -13,13 +13,15 @@ import { Container, Row } from "react-bootstrap";
  */
 export default class Routes extends React.Component {
   render() {
+    const { authUser } = this.props;
     return (
       <Container>
         <Row className="justify-content-center">
           <Switch>
-            <Route exact path="/">
-              {this.props.authUser.id === undefined ||
-              this.props.authUser.id === null ? (
+            {authUser.id === undefined || authUser.id ===null ? 
+            (<Login />) : 
+            (<><Route exact path="/">
+              {authUser.id === undefined || authUser.id === null ? (
                 <Redirect to="/login" />
               ) : (
                 <Home />
@@ -41,7 +43,8 @@ export default class Routes extends React.Component {
               render={(props) => (
                 <QuestionOveview id={props.match.params.questionId} />
               )}
-            />
+            /></>)}
+            
           </Switch>
         </Row>
       </Container>
