@@ -24,7 +24,9 @@ class App extends React.Component {
 
             {this.props.authUser.id === undefined ||
             this.props.authUser.id === null ? (
-              <Login />
+              <Container>
+                <Login />
+              </Container>
             ) : (
               <Routes authUser={this.props.authUser} />
             )}
