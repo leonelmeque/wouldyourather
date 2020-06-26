@@ -8,8 +8,8 @@
    margin: 20px 0;
    padding: 10px px;
    align-items: center;
-}
-.question-container span{
+
+ span{
     width: 100%;
     border-bottom: 1px solid black;
     padding: 10px 0px;
@@ -36,7 +36,14 @@
     border-left: 1px solid;
 }
 
-.question-container h3{
+h3{
     padding-left: 10px;
 }
 
+}
+
+.answer-container{
+    display: flex;
+    width: 400px;
+    border: 1px solid black;
+}

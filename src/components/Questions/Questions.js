@@ -4,8 +4,8 @@ import { formatQuestion } from "../../utils/helpers";
 import { Link } from "react-router-dom";
 import { handleAnswerQuestion } from "../../actions/questions";
 import { handleUpdateAnsweredQuestions } from "../../actions/users";
-import {Col} from "react-bootstrap";
-import "./question.css";
+import { Col, Form } from "react-bootstrap";
+import "./question.scss";
 class QuestionToBeAnswered extends React.Component {
   constructor(props) {
     super(props);
@@ -45,40 +45,49 @@ class QuestionToBeAnswered extends React.Component {
 
     return (
       <Col sm={6}>
-        <span>
-          <h3>{name} asks:</h3>
-        </span>
-        <img
-          src={avatar}
-          alt={name}
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 50,
-            objectFit: "cover",
-          }}
-        />
+        <div className="question-container">
+          <span>
+            <h3>{name} asks:</h3>
+          </span>
+   
+        <div className="avatar">
+          <img
+            src={avatar}
+            alt={name}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 50,
+              objectFit: "cover",
+            }}
+          />
+        </div>
 
-        <div>
-          <form>
+        <div className="details">
+          <Form>
             <h2>Would you rather</h2>
-            <input
-              type="radio"
-              id="optionOne"
-              value="optionOne"
-              name="answer"
-              onChange={(e) => this.handleChange(e)}
-            />
-            <label htmlFor="optionOne">{optionOne.text}</label>
-            <br />
-            <input
-              type="radio"
-              id="optionTwo"
-              value="optionTwo"
-              name="answer"
-              onChange={(e) => this.handleChange(e)}
-            />
-            <label htmlFor="optionTwo">{optionTwo.text}</label>
+            <Form.Group>
+              <Form.Check
+                type="radio"
+                id="optionOne"
+                value="optionOne"
+                name="answer"
+                label={optionOne.text}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Check
+                type="radio"
+                id="optionTwo"
+                value="optionTwo"
+                name="answer"
+                label={optionTwo.text}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </Form.Group>
+
             <br />
             <Link
               to={"/answeredquestions/" + id}
@@ -92,7 +101,8 @@ class QuestionToBeAnswered extends React.Component {
             >
               Submit Answer
             </Link>
-          </form>
+          </Form>
+        </div>
         </div>
       </Col>
     );
@@ -124,9 +134,13 @@ function QuestionPreview(props) {
         <h2>Would you rather</h2>
         <p>{optionOne.text}</p>
         {props.unAnswered ? (
-          <Link className="btn btn-primary" to={`/answeredquestions/${id}`}>View Poll</Link>
+          <Link className="btn btn-primary" to={`/answeredquestions/${id}`}>
+            View Poll
+          </Link>
         ) : (
-          <Link className="btn btn-primary" to={`/questions/${id}`}>View Poll</Link>
+          <Link className="btn btn-primary" to={`/questions/${id}`}>
+            View Poll
+          </Link>
         )}
       </div>
     </div>
