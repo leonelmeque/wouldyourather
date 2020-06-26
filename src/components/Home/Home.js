@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Questions from "../Questions/Questions";
 import Login from "../Login/Login";
 import "./home.css";
-
+import {Col} from "react-bootstrap";
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -27,38 +27,45 @@ class Home extends React.Component {
     return (
       <>
         {this.props.authUser !== null ? (
-          <div style={{width: 400}}>
-            <div style={{display:'flex' }}>
-            <div >
-                <button onClick={(e) => this.handleToggle(e, false)}>
-                  <h3>Unanswered Questions</h3>
-                </button>
-              </div>
-              <div>
-                <button onClick={(e) => this.handleToggle(e, true)}>
-                  <h3>Answered Questions</h3>
-                </button>
-              </div>
-            </div>
+              <Col md={6}>
+                <div className="justify-content-center">
+                  <div style={{ width: 400 }}>
+                    <div style={{ display: "flex" }}>
+                      <div>
+                        <button onClick={(e) => this.handleToggle(e, false)}>
+                          <h3>Unanswered Questions</h3>
+                        </button>
+                      </div>
+                      <div>
+                        <button onClick={(e) => this.handleToggle(e, true)}>
+                          <h3>Answered Questions</h3>
+                        </button>
+                      </div>
+                    </div>
 
-            <div className="home-container">
-              {this.state.toggleList
-                ? questions.map((obj) => {
-                    return (
-                      <div key={obj.id}>
-                        <Questions.Question id={obj.id} />
-                      </div>
-                    );
-                  })
-                : questions.map((obj) => {
-                    return (
-                      <div key={obj.id}>
-                        <Questions.Question id={obj.id} unAnswered={false} />
-                      </div>
-                    );
-                  })}
-            </div>
-          </div>
+                    <div className="home-container">
+                      {this.state.toggleList
+                        ? questions.map((obj) => {
+                            return (
+                              <div key={obj.id}>
+                                <Questions.Question id={obj.id} />
+                              </div>
+                            );
+                          })
+                        : questions.map((obj) => {
+                            return (
+                              <div key={obj.id}>
+                                <Questions.Question
+                                  id={obj.id}
+                                  unAnswered={false}
+                                />
+                              </div>
+                            );
+                          })}
+                    </div>
+                  </div>
+                </div>
+              </Col>
         ) : (
           <Login />
         )}
