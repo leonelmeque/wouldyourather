@@ -28,8 +28,6 @@ function generateUID() {
     );
   }
 
-  
-
 export function newformatQuestion({ optionOneText, optionTwoText, author }) {
     return {
       id: generateUID(),

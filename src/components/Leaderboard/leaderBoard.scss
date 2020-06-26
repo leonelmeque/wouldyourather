@@ -1,0 +1,23 @@
+.lead-card{
+    
+    border: 1px solid black;
+    margin: 32px 0px;
+    display: flex;
+    padding: 16px 0px;
+    width :30vw;
+
+    .left-column{
+        display: flex;
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right-column{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        justify-content: center;
+    }
+    
+}
