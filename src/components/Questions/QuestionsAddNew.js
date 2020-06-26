@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { handleSaveNewQuestion } from "../../actions/questions";
 import { newformatQuestion } from "../../utils/helpers";
-
+import { Row, Col, Button, Form } from "react-bootstrap";
 
 class QuestionAddNew extends React.Component {
   constructor(props) {
@@ -12,7 +12,6 @@ class QuestionAddNew extends React.Component {
     this.questionTwo = React.createRef();
   }
 
-  
   handleSubmit() {
     const optionOneText = this.questionOne.current.value;
     const optionTwoText = this.questionTwo.current.value;
@@ -35,32 +34,48 @@ class QuestionAddNew extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Create New Question</h2>
-        <p>Complete the question</p>
-        <form>
-          <h3>Would you rather...</h3>
-          <input
-            type="text"
-            ref={this.questionOne}
-            placeholder="Enter your first question"
-          />
-          <p>OR</p>
-          <input
-            type="text"
-            ref={this.questionTwo}
-            placeholder="Enter your second question"
-          />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              this.handleSubmit();
-            }}
-          >
-            Submit
-          </button>
-        </form>
-      </div>
+      <Row>
+        <Col sm={12}>
+          <h2>Create New Question</h2>
+          <p>Complete the question</p>
+        </Col>
+        <Col sm={12}>
+          <Form>
+            <h3>Would you rather...</h3>
+
+            <Form.Group controlId="firstQuestion">
+              <Form.Label> <span role="img" aria-label="Nerd Emoji">🤓</span>Write your first question...</Form.Label>
+              <Form.Control
+                type="text"
+                ref={this.questionOne}
+                id="firstQuestion"
+                placeholder="Enter your first question"
+              />
+            </Form.Group>
+            <p>OR</p>
+
+            <Form.Group controlId="secondQuestion">
+              <Form.Label> <span role="img" aria-label="Nerd Emoji">🤓</span>Write your second question...</Form.Label>
+              <Form.Control
+                type="text"
+                ref={this.questionTwo}
+                id="secondQuestion"
+                placeholder="Enter your second question"
+              />
+            </Form.Group>
+
+            <Button
+              type="button"
+              value="Submit"
+              as="input"
+              onClick={(e) => {
+                e.preventDefault();
+                this.handleSubmit();
+              }}
+            />
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
