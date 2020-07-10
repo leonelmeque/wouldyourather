@@ -15,7 +15,13 @@
 @import "../node_modules/bootstrap/scss/forms";
 
 
+$theme-colors: (
+  primary: #4CAF50,
+  "danger": #ff4136
+);
 
+$enable-rounded: false;
+$enable-shadows: true;
+$spacer: 1rem;
 
-
-
+@import "bootstrap";

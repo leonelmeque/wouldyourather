@@ -38,6 +38,29 @@
 h3{
     padding-left: 10px;
 }
+input[type="radio"]:checked{
+       color:#FF00FF
+}
+
+input[type="radio"]:checked::before{
+    content:"";
+    position: absolute;
+    top:0;
+    left:0;
+    border: 1px solid #ffaeB5;
+    border-radius: 100%;
+    background: red;
+}
+
+input[type="radio"]:checked::after{
+    content:"";
+    position: absolute;
+    top:0;
+    left:0;
+    border: 1px solid #ffaeB5;
+    border-radius: 100%;
+    background: red;
+}
 
 }
 

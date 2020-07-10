@@ -8,19 +8,22 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin:100px 0px;
-
+    
     h2{
         width: 100%;
         text-align: center;
         margin: 8px 0px;
+        font-weight: 600;
+        text-transform: uppercase;
     }
 
     select{
         width: 80%;
         margin: 8px 10%;
+        
     }
 
-    a{
+    a {
         width: 50%;
         margin: 8px auto;
     }

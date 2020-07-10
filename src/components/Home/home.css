@@ -1,4 +1,4 @@
-button{
+#home label{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -6,4 +6,14 @@ button{
     text-align: center;
     text-decoration: none;
     display: inline-block;
+}
+
+#home [type="radio"]:checked ~ label{
+    background:black;
+    color: white;
+    transform: scale(1.1);
+}
+
+#home [type="radio"]{
+    display: none;
 }

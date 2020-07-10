@@ -13,7 +13,6 @@ class Home extends React.Component {
   }
 
   handleToggle(e, toggle) {
-    e.preventDefault();
     this.setState(() => ({
       toggleList: toggle,
     }));
@@ -29,17 +28,23 @@ class Home extends React.Component {
         {this.props.authUser !== null ? (
               <Col md={6}>
                 <div className="justify-content-center">
-                  <div >
+                  <div id="home">
                     <div style={{ display: "flex" }}>
                       <div>
-                        <button onClick={(e) => this.handleToggle(e, false)}>
-                          <h3>Unanswered Questions</h3>
-                        </button>
+                        <input type="radio" id="unanswered" name="question-section" value="unanswered" defaultChecked onChange={(e)=>{this.handleToggle(e,false)}} />
+                        <label htmlFor="unanswered">
+                        <h3>Unanswered Questions</h3>
+                        </label>
+                         
+                  
                       </div>
                       <div>
-                        <button onClick={(e) => this.handleToggle(e, true)}>
-                          <h3>Answered Questions</h3>
-                        </button>
+                        <input type="radio" id="answered" name="question-section" value="answered" onChange={(e)=>{this.handleToggle(e,true)}} />
+                        <label htmlFor="answered">
+                        <h3>Answered Questions</h3>
+                        </label>
+                        
+                       
                       </div>
                     </div>
 
