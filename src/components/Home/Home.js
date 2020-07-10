@@ -52,19 +52,22 @@ class Home extends React.Component {
                       {this.state.toggleList
                         ? questions.map((obj) => {
                             return (
-                              <div key={obj.id}>
+                              <div key={obj.id} className="question-animation">
                                 <Questions.Question id={obj.id} />
                               </div>
                             );
                           })
                         : questions.map((obj) => {
+                         
                             return (
-                              <div key={obj.id}>
+                              <div key={obj.id} className="question-animation">
                                 <Questions.Question
                                   id={obj.id}
                                   unAnswered={false}
                                 />
+                                
                               </div>
+                             
                             );
                           })}
                     </div>

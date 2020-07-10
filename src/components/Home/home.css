@@ -8,12 +8,27 @@
     display: inline-block;
 }
 
-#home [type="radio"]:checked ~ label{
+#home [type="radio"]:checked + label{
     background:black;
     color: white;
     transform: scale(1.1);
+    transition: all .5s;
 }
 
 #home [type="radio"]{
-    display: none;
+    opacity: 0;
+}
+
+.question-animation:hover{
+    transform: scale(1.02);
+    transition: all .2s;
+}
+
+.home-container{
+    animation: show 1s;
+}
+
+@keyframes show {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
