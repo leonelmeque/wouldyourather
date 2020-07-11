@@ -31,13 +31,14 @@ Normalization
 button {
   outline: none !important;
 }
-
-.App {
- 
-  min-height: 100vh;
+a:link,a:hover{
+  text-decoration: none !important;
 }
 
-p,label{
-  font-family: Helvetica, sans-serif;
-  font-weight: 300;
+a:hover{
+  color:#ffffff !important;
+}
+
+.App {
+  min-height: 100vh;
 }
