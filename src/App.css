@@ -24,17 +24,15 @@ h2,h3,p{
 /*
 Normalization
 */
-*{
+* {
   outline: none;
 }
 
-button{
+button {
   outline: none !important;
 }
 
-.App{
-  min-height: 70vmax;
+.App {
+ 
+  min-height: 100vh;
 }
-
-
-
