@@ -28,6 +28,7 @@ class Home extends React.Component {
         {this.props.authUser !== null ? (
               <Col md={6}>
                 <div className="justify-content-center">
+                <h3 className="text-center">Timeline</h3>
                   <div id="home">
                     <div style={{ display: "flex" }}>
                       <div>

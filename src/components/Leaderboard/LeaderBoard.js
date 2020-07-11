@@ -24,6 +24,7 @@ class LeaderBoard extends React.Component {
     const rankingUsers = this.formatUsers();
     return (
       <div>
+        <h3 className="text-center">LeaderBoard</h3>
         {rankingUsers.map((user) => {
           return (
             <div key={user.name} className="lead-card">
