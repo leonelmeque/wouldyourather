@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
 import Navigation from "./components/shared/Navigation";
+import Footer from "./components/shared/Footer";
 import Routes from "./components/shared/Routes";
 import "./App.css";
 import "./main.scss";
@@ -13,6 +14,7 @@ class App extends React.Component {
   }
   render() {
     return (
+      <>
       <div className="App">
         {this.props.loading ? (
           <Container>
@@ -30,9 +32,12 @@ class App extends React.Component {
             ) : (
               <Routes authUser={this.props.authUser} />
             )}
+           
           </>
         )}
       </div>
+       <Footer />
+       </>
     );
   }
 }
